@@ -3,7 +3,7 @@
 
 
 Author: Kelly Kearney
-
+[![View aggregate on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/42577-aggregate)
 
 This repository includes the code for the `aggregate.m` Matlab function, along with all dependent functions required to run it.
 
