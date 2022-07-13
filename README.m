@@ -1,12 +1,13 @@
 %% aggregate.m: aggregate values in a matrix
 % Author: Kelly Kearney
 %
-% This repository includes the code for the |aggregate.m| Matlab function,
-% along with all dependent functions required to run it. 
+% This repository includes the code for the |aggregate.m| and
+% |aggregatehist.m| Matlab functions, along with all dependent functions
+% required to run them.  
 %
 % This function groups together values of y, based on category values in
-% x. It performs more or less like accumaray except it allows x to be any
-% value, not just indices, and y can have any number of columns.      
+% x. It performs more or less like accumaray and the newer splitapply
+% functions but with more flexible options for the grouping variable.     
 %
 %% Getting started
 %
