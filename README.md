@@ -3,12 +3,12 @@
 
 
 Author: Kelly Kearney
-[![View aggregate on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/42577-aggregate)
-
-This repository includes the code for the `aggregate.m` Matlab function, along with all dependent functions required to run it.
 
 
-This function groups together values of y, based on category values in x. It performs more or less like accumaray except it allows x to be any value, not just indices, and y can have any number of columns.
+This repository includes the code for the `aggregate.m` and `aggregatehist.m` Matlab functions, along with all dependent functions required to run them.
+
+
+This function groups together values of y, based on category values in x. It performs more or less like accumaray and the newer splitapply functions but with more flexible options for the grouping variable.
 
 
 
@@ -115,7 +115,7 @@ ymonthly1
 
 
 ```
-Elapsed time is 0.004897 seconds.
+Elapsed time is 0.004129 seconds.
 
 unqdv1 =
 
@@ -135,18 +135,18 @@ unqdv1 =
 
 ymonthly1 =
 
-    0.9986    0.9872    0.9641    0.9915    0.9993
-    0.9906    0.9929    0.9505    0.9814    0.9939
-    0.9655    0.9869    0.9860    0.9986    0.9955
-    0.9945    0.9969    0.9973    0.9978    0.9938
-    0.9999    0.9694    0.9988    0.9950    0.9935
-    0.9853    0.9851    0.9950    0.9620    0.9967
-    0.9940    0.9977    0.9976    0.9894    0.9848
-    0.9909    0.9819    0.9948    0.9900    0.9658
-    0.9926    0.9935    0.9942    1.0000    0.9691
-    0.9944    0.9988    0.9996    0.9912    0.9953
-    0.9958    0.9819    0.9789    0.9954    0.9959
-    0.9767    0.9847    0.9738    0.9961    0.9883
+       0.9828      0.99894      0.99039      0.99836      0.99153
+      0.97251      0.98854      0.99534      0.99817      0.99373
+      0.99326      0.98096      0.99718      0.97635      0.99907
+      0.98464      0.99274      0.99434      0.99898      0.98916
+      0.99374      0.98904      0.99184      0.98563       0.9946
+      0.96326      0.94601      0.99774      0.98785       0.9928
+      0.98269      0.98128      0.96038      0.99827      0.97032
+      0.99108      0.99053      0.99389      0.99406      0.99808
+      0.98049      0.97057      0.99275      0.97529       0.9952
+      0.98287      0.97395      0.99563      0.99642      0.98981
+      0.99646      0.99582      0.99945      0.96349      0.99475
+      0.97861      0.98167      0.99644       0.9871      0.98205
 
 
 ```
@@ -170,7 +170,7 @@ ymonthly2
 
 
 ```
-Elapsed time is 0.003516 seconds.
+Elapsed time is 0.002709 seconds.
 
 unqdv2 =
 
@@ -190,18 +190,18 @@ unqdv2 =
 
 ymonthly2 =
 
-    0.9986    0.9872    0.9641    0.9915    0.9993
-    0.9906    0.9929    0.9505    0.9814    0.9939
-    0.9655    0.9869    0.9860    0.9986    0.9955
-    0.9945    0.9969    0.9973    0.9978    0.9938
-    0.9999    0.9694    0.9988    0.9950    0.9935
-    0.9853    0.9851    0.9950    0.9620    0.9967
-    0.9940    0.9977    0.9976    0.9894    0.9848
-    0.9909    0.9819    0.9948    0.9900    0.9658
-    0.9926    0.9935    0.9942    1.0000    0.9691
-    0.9944    0.9988    0.9996    0.9912    0.9953
-    0.9958    0.9819    0.9789    0.9954    0.9959
-    0.9767    0.9847    0.9738    0.9961    0.9883
+       0.9828      0.99894      0.99039      0.99836      0.99153
+      0.97251      0.98854      0.99534      0.99817      0.99373
+      0.99326      0.98096      0.99718      0.97635      0.99907
+      0.98464      0.99274      0.99434      0.99898      0.98916
+      0.99374      0.98904      0.99184      0.98563       0.9946
+      0.96326      0.94601      0.99774      0.98785       0.9928
+      0.98269      0.98128      0.96038      0.99827      0.97032
+      0.99108      0.99053      0.99389      0.99406      0.99808
+      0.98049      0.97057      0.99275      0.97529       0.9952
+      0.98287      0.97395      0.99563      0.99642      0.98981
+      0.99646      0.99582      0.99945      0.96349      0.99475
+      0.97861      0.98167      0.99644       0.9871      0.98205
 
 
 ```
@@ -229,4 +229,4 @@ I do monitor the MatlabCentral FileExchange entry for any issues raised in the c
 
 
 
-<sub>[Published with MATLAB R2016a]("http://www.mathworks.com/products/matlab/")</sub>
+<sub>[Published with MATLAB R2019a]("http://www.mathworks.com/products/matlab/")</sub>

@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>aggregate.m: aggregate values in a matrix</title><meta name="generator" content="MATLAB 9.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2016-11-15"><meta name="DC.source" content="tp4eb33f0e_592a_4ec8_9011_67592818ceb4.m"><style type="text/css">
+      --><title>aggregate.m: aggregate values in a matrix</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-07-13"><meta name="DC.source" content="tpd2e40f33_eb46_4ed5_87fd_44e012d643a7.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,9 +66,9 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>aggregate.m: aggregate values in a matrix</h1><!--introduction--><p>Author: Kelly Kearney</p><p>This repository includes the code for the <tt>aggregate.m</tt> Matlab function, along with all dependent functions required to run it.</p><p>This function groups together values of y, based on category values in x. It performs more or less like accumaray except it allows x to be any value, not just indices, and y can have any number of columns.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Getting started</a></li><li><a href="#2">Syntax</a></li><li><a href="#3">Examples</a></li><li><a href="#6">Contributions</a></li></ul></div><h2>Getting started<a name="1"></a></h2><p><b>Prerequisites</b></p><p>This function requires Matlab R14 or later.</p><p><b>Downloading and installation</b></p><p>This code can be downloaded from <a href="https://github.com/kakearney/aggregate-pkg/">Github</a> or the <a href="http://www.mathworks.com/matlabcentral/fileexchange/42577-aggregate">MatlabCentral File Exchange</a>.  The File Exchange entry is updated daily from the GitHub repository.</p><p><b>Matlab Search Path</b></p><p>The following folders need to be added to your Matlab Search path (via <tt>addpath</tt>, <tt>pathtool</tt>, etc.):</p><pre class="language-matlab">aggregate-pkg/aggregate
-</pre><h2>Syntax<a name="2"></a></h2><pre>[xcon, yagg, yidxagg] = aggregate(x, y)
-[xcon, yagg, yidxagg] = aggregate(x, y, fun)</pre><p>Input variables:</p><div><ul><li><tt>x</tt>:          n x p array, aggregator variable can be either numeric or a                 cell array of strings</li><li><tt>y</tt>:          n x m array, values to be grouped</li><li><tt>fun</tt>:        function handle. If included, this function is applied to                 the grouped values of y</li></ul></div><p>Output variables:</p><div><ul><li><tt>xcon</tt>:       unique rows of x</li><li><tt>yagg</tt>:       cell array of y values corresponding to each x.</li><li><tt>yidxagg</tt>:    row indices of aggregated values</li></ul></div><h2>Examples<a name="3"></a></h2><p>For this example, we'll find the maximum value in each month in the following dataset:</p><pre class="codeinput"><span class="comment">% Sample data</span>
+  </style></head><body><div class="content"><h1>aggregate.m: aggregate values in a matrix</h1><!--introduction--><p>Author: Kelly Kearney</p><p>This repository includes the code for the <tt>aggregate.m</tt> and <tt>aggregatehist.m</tt> Matlab functions, along with all dependent functions required to run them.</p><p>This function groups together values of y, based on category values in x. It performs more or less like accumaray and the newer splitapply functions but with more flexible options for the grouping variable.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Getting started</a></li><li><a href="#2">Syntax</a></li><li><a href="#3">Examples</a></li><li><a href="#6">Contributions</a></li></ul></div><h2 id="1">Getting started</h2><p><b>Prerequisites</b></p><p>This function requires Matlab R14 or later.</p><p><b>Downloading and installation</b></p><p>This code can be downloaded from <a href="https://github.com/kakearney/aggregate-pkg/">Github</a> or the <a href="http://www.mathworks.com/matlabcentral/fileexchange/42577-aggregate">MatlabCentral File Exchange</a>.  The File Exchange entry is updated daily from the GitHub repository.</p><p><b>Matlab Search Path</b></p><p>The following folders need to be added to your Matlab Search path (via <tt>addpath</tt>, <tt>pathtool</tt>, etc.):</p><pre class="language-matlab">aggregate-pkg/aggregate
+</pre><h2 id="2">Syntax</h2><pre>[xcon, yagg, yidxagg] = aggregate(x, y)
+[xcon, yagg, yidxagg] = aggregate(x, y, fun)</pre><p>Input variables:</p><div><ul><li><tt>x</tt>:          n x p array, aggregator variable can be either numeric or a                 cell array of strings</li><li><tt>y</tt>:          n x m array, values to be grouped</li><li><tt>fun</tt>:        function handle. If included, this function is applied to                 the grouped values of y</li></ul></div><p>Output variables:</p><div><ul><li><tt>xcon</tt>:       unique rows of x</li><li><tt>yagg</tt>:       cell array of y values corresponding to each x.</li><li><tt>yidxagg</tt>:    row indices of aggregated values</li></ul></div><h2 id="3">Examples</h2><p>For this example, we'll find the maximum value in each month in the following dataset:</p><pre class="codeinput"><span class="comment">% Sample data</span>
 
 nt = 1000;
 t = datenum(2014,6,1) + rand(nt,1)*365;
@@ -86,7 +86,7 @@ toc
 
 unqdv1
 ymonthly1
-</pre><pre class="codeoutput">Elapsed time is 0.005303 seconds.
+</pre><pre class="codeoutput">Elapsed time is 0.025248 seconds.
 
 unqdv1 =
 
@@ -106,18 +106,18 @@ unqdv1 =
 
 ymonthly1 =
 
-    0.9838    0.9918    0.9900    0.9802    0.9896
-    0.9988    0.9942    0.9921    0.9861    0.9972
-    0.9958    0.9907    0.9962    0.9741    0.9980
-    0.9869    0.9763    0.9922    0.9927    0.9992
-    0.9890    0.9966    0.9941    0.9919    0.9718
-    0.9948    0.9924    0.9911    0.9749    0.9994
-    0.9924    0.9804    0.9960    0.9935    0.9982
-    0.9865    0.9798    0.9950    0.9936    0.9983
-    0.9930    0.9877    0.9963    0.9989    0.9256
-    0.9971    0.9830    0.9983    0.9887    0.9722
-    0.9954    0.9976    0.9983    0.9872    0.9982
-    0.9993    0.9986    0.9895    0.9870    0.9856
+      0.99522      0.97726      0.96647      0.99688      0.95209
+      0.97856      0.99259      0.98806       0.9726      0.98843
+      0.98668      0.99499      0.98745      0.99262      0.99688
+      0.97419      0.99755      0.97111      0.99343      0.98221
+      0.97231      0.99979      0.99714      0.98895      0.98206
+      0.99538      0.99762      0.98304      0.98518       0.9979
+      0.99424      0.99334      0.99977      0.99304      0.99083
+      0.97596      0.96855      0.99843       0.9724      0.96544
+      0.99948       0.9668      0.98987      0.99816      0.99843
+       0.9917      0.99537      0.99704      0.99491      0.99859
+      0.98056      0.98294      0.99131      0.97457      0.99461
+      0.98749      0.99293      0.99119      0.98834      0.99402
 
 </pre><p>The aggregate function simplifies the syntax by removing the need for the aggregator (the first input to either <tt>accumarray</tt> or <tt>aggregate</tt>) to be positive integers.  It also performs the aggregations on all columns of y at once, both simplifying syntax and speeding up the calculation (relative to looping and repeating accumarray, as above).</p><pre class="codeinput">tic;
 [unqdv2, ymonthly2] = aggregate(dv(:,1:2), y, @(x) max(x,[],1));
@@ -126,7 +126,7 @@ toc
 
 unqdv2
 ymonthly2
-</pre><pre class="codeoutput">Elapsed time is 0.006745 seconds.
+</pre><pre class="codeoutput">Elapsed time is 0.017206 seconds.
 
 unqdv2 =
 
@@ -146,30 +146,31 @@ unqdv2 =
 
 ymonthly2 =
 
-    0.9838    0.9918    0.9900    0.9802    0.9896
-    0.9988    0.9942    0.9921    0.9861    0.9972
-    0.9958    0.9907    0.9962    0.9741    0.9980
-    0.9869    0.9763    0.9922    0.9927    0.9992
-    0.9890    0.9966    0.9941    0.9919    0.9718
-    0.9948    0.9924    0.9911    0.9749    0.9994
-    0.9924    0.9804    0.9960    0.9935    0.9982
-    0.9865    0.9798    0.9950    0.9936    0.9983
-    0.9930    0.9877    0.9963    0.9989    0.9256
-    0.9971    0.9830    0.9983    0.9887    0.9722
-    0.9954    0.9976    0.9983    0.9872    0.9982
-    0.9993    0.9986    0.9895    0.9870    0.9856
+      0.99522      0.97726      0.96647      0.99688      0.95209
+      0.97856      0.99259      0.98806       0.9726      0.98843
+      0.98668      0.99499      0.98745      0.99262      0.99688
+      0.97419      0.99755      0.97111      0.99343      0.98221
+      0.97231      0.99979      0.99714      0.98895      0.98206
+      0.99538      0.99762      0.98304      0.98518       0.9979
+      0.99424      0.99334      0.99977      0.99304      0.99083
+      0.97596      0.96855      0.99843       0.9724      0.96544
+      0.99948       0.9668      0.98987      0.99816      0.99843
+       0.9917      0.99537      0.99704      0.99491      0.99859
+      0.98056      0.98294      0.99131      0.97457      0.99461
+      0.98749      0.99293      0.99119      0.98834      0.99402
 
-</pre><h2>Contributions<a name="6"></a></h2><p>Community contributions to this package are welcome!</p><p>To report bugs, please submit an <a href="https://github.com/kakearney/aggregate-pkg/issues">issue</a> on GitHub and include:</p><div><ul><li>your operating system</li><li>your version of Matlab and all relevant toolboxes (type <tt>ver</tt> at the   Matlab command line to get this info)</li><li>code/data to reproduce the error or buggy behavior, and the full text   of any error messages received</li></ul></div><p>Please also feel free to submit enhancement requests, or to send pull requests (via GitHub) for bug fixes or new features.</p><p>I do monitor the MatlabCentral FileExchange entry for any issues raised in the comments, but would prefer to track issues on GitHub.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016a</a><br></p></div><!--
+</pre><h2 id="6">Contributions</h2><p>Community contributions to this package are welcome!</p><p>To report bugs, please submit an <a href="https://github.com/kakearney/aggregate-pkg/issues">issue</a> on GitHub and include:</p><div><ul><li>your operating system</li><li>your version of Matlab and all relevant toolboxes (type <tt>ver</tt> at the   Matlab command line to get this info)</li><li>code/data to reproduce the error or buggy behavior, and the full text   of any error messages received</li></ul></div><p>Please also feel free to submit enhancement requests, or to send pull requests (via GitHub) for bug fixes or new features.</p><p>I do monitor the MatlabCentral FileExchange entry for any issues raised in the comments, but would prefer to track issues on GitHub.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% aggregate.m: aggregate values in a matrix
 % Author: Kelly Kearney
 %
-% This repository includes the code for the |aggregate.m| Matlab function,
-% along with all dependent functions required to run it. 
+% This repository includes the code for the |aggregate.m| and
+% |aggregatehist.m| Matlab functions, along with all dependent functions
+% required to run them.  
 %
 % This function groups together values of y, based on category values in
-% x. It performs more or less like accumaray except it allows x to be any
-% value, not just indices, and y can have any number of columns.      
+% x. It performs more or less like accumaray and the newer splitapply
+% functions but with more flexible options for the grouping variable.     
 %
 %% Getting started
 %
